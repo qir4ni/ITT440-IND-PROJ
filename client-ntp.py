@@ -8,7 +8,7 @@ import os
 s = socket.socket()
 
 # the ip address of server
-host = '192.168.1.7'
+host = '192.168.1.5'
 
 # the port
 port = 123
