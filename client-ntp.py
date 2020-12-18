@@ -25,5 +25,7 @@ buffer = 1024
 # send msg to server via UDP socket
 s.sendto(bytesSend, (host, port))
 
+print("[+] Sending message to NTP Server")
+
 # close the socket
 s.close()
