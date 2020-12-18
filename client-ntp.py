@@ -59,10 +59,15 @@ def main():
 
 	# send msg to server via UDP socket
 	s.sendto(bytesSend, (host, port))
+	#s.sendto(localDT, (host, port))
 
 
 	print("[+] Sending Local DateTime to NTP Server")
 
+	T1 = localDT # originate timestamp
+	#T2 = # receive timestamp
+	#T3 = # transmitted timestamp
+	#T4 =  #timestamp reference
 	# close the socket
 	s.close()
 
