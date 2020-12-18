@@ -4,40 +4,67 @@ import json
 import tqdm
 import os
 import datetime
+from os import system
 
-# create client socket
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, 0)
+def calcOffset():
+	print("Calculating Offset")
 
-# the ip address of server
-host = '192.168.1.5'
+def calcDelay():
+	print("Calculating Delay")
 
-# the port
-port = 123
+_ = system('clear')
 
-# connect to socket
-print(f"[+] Connecting to {host}:{port}")
-s.connect((host, port))
-print("[+] Connected.")
+print(r"""
+-----------------------------------------
+  _   _ _______ _____         __   ___  
+ | \ | |__   __|  __ \       /_ | / _ \ 
+ |  \| |  | |  | |__) | __   _| || | | |
+ | . ` |  | |  |  ___/  \ \ / / || | | |
+ | |\  |  | |  | |       \ V /| || |_| |
+ |_| \_|  |_|  |_|        \_/ |_(_)___/ 
 
-# get local sys datetime
-localDT = datetime.datetime.now()
+	     Client Version
+-----------------------------------------
+                """)
 
-# print local sys datetime
-print("[+] Local System DateTime : ", localDT)
+def main():
 
-# convert datetime to string
-localDTStr = localDT.strftime("%Y-%m-%d, %H:%M:%S")
+	# create client socket
+	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, 0)
 
-#msgFromClient = "Hello, this is client"
-#bytesSend = str.encode(msgFromClient)
-bytesSend = str.encode(localDTStr)
-buffer = 1024
+	# the ip address of server
+	host = '192.168.1.5'
 
-# send msg to server via UDP socket
-s.sendto(bytesSend, (host, port))
+	# the port
+	port = 123
+
+	# connect to socket
+	print(f"[+] Connecting to {host}:{port}")
+	s.connect((host, port))
+	print("[+] Connected.")
+
+	# get local sys datetime
+	localDT = datetime.datetime.now()
+
+	# print local sys datetime
+	print("[+] Local System DateTime : ", localDT)
+
+	# convert datetime to string
+	localDTStr = localDT.strftime("%Y-%m-%d, %H:%M:%S")
+
+	#msgFromClient = "Hello, this is client"
+	#bytesSend = str.encode(msgFromClient)
+	bytesSend = str.encode(localDTStr)
+	buffer = 1024
+
+	# send msg to server via UDP socket
+	s.sendto(bytesSend, (host, port))
 
 
-print("[+] Sending Local DateTime to NTP Server")
+	print("[+] Sending Local DateTime to NTP Server")
 
-# close the socket
-s.close()
+	# close the socket
+	s.close()
+
+if __name__ == "__main__":
+	main()
