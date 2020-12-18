@@ -65,8 +65,15 @@ def main():
 	print("[+] Sending Local DateTime to NTP Server")
 
 	T1 = localDT # originate timestamp
-	#T2 = # receive timestamp
-	#T3 = # transmitted timestamp
+
+	T2, address = s.recvfrom(buffer) # receive timestamp
+	T2 = datetime.strptime(T2.decode(), "%Y-%m-%d, %H:%M:%S")
+	print(T2)
+
+	T3, address = s.recvfrom(buffer)  # transmitted timestamp
+	T3 = datetime.strptime(T3.decode(), "%Y-%m-%d, %H:%M:%S")
+	print(T3)
+
 	#T4 =  #timestamp reference
 	# close the socket
 	s.close()
