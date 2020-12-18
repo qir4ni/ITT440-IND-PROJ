@@ -76,6 +76,7 @@ def main():
 
 			# listening for incoming datagrams
 			while(True):
+				print("[+] Server is listening..")
 				bytesRecv = s.recvfrom(buffer)
 				dateRecv = bytesRecv[0]
 				address = bytesRecv[1]
