@@ -77,16 +77,25 @@ def main():
 			# listening for incoming datagrams
 			while(True):
 				print("[+] Server is listening..")
-				bytesRecv = s.recvfrom(buffer)
-				dateRecv = bytesRecv[0]
-				address = bytesRecv[1]
+				#bytesRecv = s.recvfrom(buffer)
+				#dateRecv = bytesRecv[0]
+				#address = bytesRecv[1]
 
-				clientDate = "DateTime on Client: {}".format(dateRecv)
-				clientIP = "Client IP Address: {}".format(address)
+				#clientDate = "DateTime on Client: {}".format(dateRecv)
+				#clientIP = "Client IP Address: {}".format(address)
 
-				print(clientDate)
-				print(clientIP)
-				
+				dateRecv, address = s.recvfrom(buffer)
+				clientLocalDT = datetime.strptime(dateRecv.decode(), "%Y-%m-%d, %H:%M:%S")
+				print(clientLocalDT)
+				#DTRecv = bytesRecv.decode()
+				#print(DTRecv)
+				#clientLocalDT  = datetime.strptime(clientDate,"%Y-%m-%d, %H:%M:%S")
+				#print("Local DateTime of Client: ")
+				#print(clientLocalDT)
+
+				#print(clientDate)
+				#print(clientIP)
+
 			print(f"[+] Socket is listening | Port: {port}")
 
 			# accept connections if there is any
