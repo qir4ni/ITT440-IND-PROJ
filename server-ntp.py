@@ -87,23 +87,24 @@ def main():
 
 				dateRecv, address = s.recvfrom(buffer)
 				host, port = address
-				print(host)
+				print("[+] Client IP Address :", host)
 
 				clientLocalDT = datetime.strptime(dateRecv.decode(), "%Y-%m-%d, %H:%M:%S")
-				print("T1",clientLocalDT)
+				print("[+] T1 :",clientLocalDT)
 
 				T2 = datetime.now() # receive timestamp
 				T2 = T2.strftime("%Y-%m-%d, %H:%M:%S") # T2 timestamp convert to string
-				print("T2", T2)
+				print("[+] T2 :", T2)
 				bytesSend = str.encode(T2)
 				s.sendto(bytesSend, (host, port))
 				print("[+] Sending T2 to Client")
 
 				T3 = datetime.now() # transmitted timestamp
 				T3 = T3.strftime("%Y-%m-%d, %H:%M:%S") # T3 timestamp convert to string
-				print("T3", T3)
+				print("[+] T3 :", T3)
 				bytesSend = str.encode(T3)
 				s.sendto(bytesSend, (host, port))
+				print("[+] Sending T3 to Client")
 
 				#DTRecv = bytesRecv.decode()
 				#print(DTRecv)
