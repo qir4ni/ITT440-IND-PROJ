@@ -76,9 +76,18 @@ def main():
 	T3 = datetime.strptime(T3.decode(), "%Y-%m-%d, %H:%M:%S")
 	print("[+] T3 :", T3)
 
-	#T4 =  #timestamp reference
+	T4 =  datetime.now() #timestamp reference
+	print("[+] T4 :", T4)
+
 	# close the socket
 	s.close()
 
 if __name__ == "__main__":
-	main()
+	try:
+        	main()
+	except KeyboardInterrupt:
+		print('Interrupted')
+		try:
+			sys.exit(0)
+		except SystemExit:
+			os._exit(0)
