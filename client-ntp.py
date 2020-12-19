@@ -51,7 +51,7 @@ def main():
 	print("[+] Local System DateTime : ", localDT)
 
 	# convert datetime to string
-	localDTStr = localDT.strftime("%Y-%m-%d, %H:%M:%S")
+	localDTStr = localDT.strftime("%Y-%m-%d, %H:%M:%S.%f")
 
 	#msgFromClient = "Hello, this is client"
 	#bytesSend = str.encode(msgFromClient)
@@ -73,10 +73,11 @@ def main():
 	print("[+] T2 :", T2)
 
 	T3, address = s.recvfrom(buffer)  # transmitted timestamp
-	T3 = datetime.strptime(T3.decode(), "%Y-%m-%d, %H:%M:%S")
+	T3 = datetime.strptime(T3.decode(), "%Y-%m-%d, %H:%M:%S.%f")
 	print("[+] T3 :", T3)
 
 	T4 =  datetime.now() #timestamp reference
+	T4 = T4.strftime("%Y-%m-%d, %H:%M:%S.%f")
 	print("[+] T4 :", T4)
 
 	# close the socket
