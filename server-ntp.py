@@ -8,6 +8,8 @@ import os
 import ntplib  # using ntplib
 from time import ctime  # importing time
 from datetime import datetime  # for current local time
+from _thread import *
+
 
 _ = system('clear')
 #print ("\n\t\t\t\t\t Booting Up the Client App ... \n")
@@ -35,6 +37,40 @@ print(r"""
                                         
 -----------------------------------------
                 """)
+
+def threaded_client(s, dateRecv, host, port):
+
+	while True:
+		#dateRecv, address = s.recvfrom(buffer)
+		#host, port = address
+
+		if not dateRecv:
+			break
+
+		print("[+] Client IP Address :", host)
+		clientLocalDT = datetime.strptime(dateRecv.decode(), "%Y-%m-%d, %H:%M:%S.%f")
+		print("[+] T1 :",clientLocalDT)
+
+		T2 = datetime.now() # receive timestamp
+		T2 = T2.strftime("%Y-%m-%d %H:%M:%S.%f") # T2 timestamp convert to string
+		print("[+] T2 :", T2)
+		bytesSend = str.encode(T2)
+		s.sendto(bytesSend, (host, port))
+		print("[+] Sending T2 to Client")
+
+		T3 = datetime.now() # transmitted timestamp
+		T3 = T3.strftime("%Y-%m-%d %H:%M:%S.%f") # T3 timestamp convert to string
+		print("[+] T3 :", T3)
+		bytesSend = str.encode(T3)
+		s.sendto(bytesSend, (host, port))
+		print("[+] Sending T3 to Client")
+		print("[+] Process Completed\n")
+
+		#s.sendall(str.encode("Bye"))
+		break
+
+	# close connection
+	s.close()
 
 
 def main():
@@ -70,59 +106,39 @@ def main():
 			# the server port
 			port = 123
 			buffer = 1024
+			ThreadCount = 0
 
 			# bind the socket
 			s.bind(('', port))
 			print(f"[+] Socket binded to " + str(port))
 
+			# server is listening
+			print(f"[+] Server is listening.. | Port: {port}")
+
 			# listening for incoming datagrams
 			while(True):
-				print("[+] Server is listening..")
-				#bytesRecv = s.recvfrom(buffer)
-				#dateRecv = bytesRecv[0]
-				#address = bytesRecv[1]
-
-				#clientDate = "DateTime on Client: {}".format(dateRecv)
-				#clientIP = "Client IP Address: {}".format(address)
 
 				dateRecv, address = s.recvfrom(buffer)
 				host, port = address
-				print("[+] Client IP Address :", host)
 
-				clientLocalDT = datetime.strptime(dateRecv.decode(), "%Y-%m-%d, %H:%M:%S.%f")
-				print("[+] T1 :",clientLocalDT)
+				# accept connections if there is any
+				#client_socket, address = s.accept()
 
-				T2 = datetime.now() # receive timestamp
-				T2 = T2.strftime("%Y-%m-%d %H:%M:%S.%f") # T2 timestamp convert to string
-				print("[+] T2 :", T2)
-				bytesSend = str.encode(T2)
-				s.sendto(bytesSend, (host, port))
-				print("[+] Sending T2 to Client")
+				# if below code is executed, that means the sender is connected
+				print(f"[+] {address} is connected.")
 
-				T3 = datetime.now() # transmitted timestamp
-				T3 = T3.strftime("%Y-%m-%d %H:%M:%S.%f") # T3 timestamp convert to string
-				print("[+] T3 :", T3)
-				bytesSend = str.encode(T3)
-				s.sendto(bytesSend, (host, port))
-				print("[+] Sending T3 to Client")
-				print("[+] Process Completed\n")
+				#new thread for client
+				start_new_thread(threaded_client, (s, dateRecv, host, port))
 
-				#DTRecv = bytesRecv.decode()
-				#print(DTRecv)
-				#clientLocalDT  = datetime.strptime(clientDate,"%Y-%m-%d, %H:%M:%S")
-				#print("Local DateTime of Client: ")
-				#print(clientLocalDT)
+				ThreadCount += 1
+				print("\n[+] Thread Number :" + str(ThreadCount))
 
-				#print(clientDate)
-				#print(clientIP)
+			# close socket
+			s.close()
 
-			print(f"[+] Socket is listening | Port: {port}")
 
-			# accept connections if there is any
-			client_socket, address = s.accept()
+			#print(f"[+] Socket is listening | Port: {port}")
 
-			# if below code is executed, that means the sender is connected
-			print(f"[+] {address} is connected.")
 
 	print("Exiting..")
 
