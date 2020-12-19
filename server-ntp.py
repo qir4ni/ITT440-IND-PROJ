@@ -3,6 +3,7 @@ import socket
 from tqdm import tqdm
 import time
 import sys
+#import datetime
 import os
 import ntplib  # using ntplib
 from time import ctime  # importing time
@@ -47,7 +48,7 @@ def main():
 		status = option
 
 		if(option == '1'):
-			local = datetime.now()
+			local = datetime.datetime.now()
 			print("\nQuerying the NTP Server\n---------------------")
 			c = ntplib.NTPClient()  # assigning to variable c
 			response = c.request('my.pool.ntp.org', version=3)
@@ -86,9 +87,9 @@ def main():
 
 				dateRecv, address = s.recvfrom(buffer)
 
-				T2 = datetime.datetime.now() # receive timestamp
+				T2 = datetime.now() # receive timestamp
 				T2 = T2.strftime("%Y-%m-%d, %H:%M:%S") # T2 timestamp convert to string
-				T3 = datetime.datetime.now() # transmitted timestamp
+				T3 = datetime.now() # transmitted timestamp
 				T3 = T3.strftime("%Y-%m-%d, %H:%M:%S") # T3 timestamp convert to string
 
 				bytesSend = str.encode(T2)
