@@ -68,7 +68,7 @@ def main():
 	T1 = localDT # originate timestamp
 
 	T2, address = s.recvfrom(buffer) # receive timestamp
-	T2 = datetime.strptime(T2.decode(), "%Y-%m-%d, %H:%M:%S")
+	T2 = datetime.strptime(T2.decode(), "%Y-%m-%d, %H:%M:%S.%f")
 	print("[+] T1 :", T1)
 	print("[+] T2 :", T2)
 
