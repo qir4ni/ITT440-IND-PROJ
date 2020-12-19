@@ -66,38 +66,38 @@ def threaded_client(s, dateRecv, host, port):
 		print("[+] Sending T3 to Client")
 		print("[+] Process Completed\n")
 
+		# server is listening
+		print(f"[+] Server is listening.. | Port: 123")
+
+
 		#s.sendall(str.encode("Bye"))
 		break
 
 	# close connection
-	s.close()
+	#s.close()
 
 
 def main():
 
 	status = '1'
 	while(status != '0'):
-		print("\n[0] Exit the Program\n[1] Print Latest DateTime Information\n[2] Change DateTime of System to Latest\n[3] Start NTP Server\n")
+		print("\n[0] Exit the Program\n[1] Print Latest DateTime Information\n[2] Start NTP Server\n")
 		option = input("Choose option: ")
 		print("Option choosed is", option)
 
 		status = option
 
 		if(option == '1'):
-			local = datetime.datetime.now()
+			local = datetime.now()
 			print("\nQuerying the NTP Server\n---------------------")
 			c = ntplib.NTPClient()  # assigning to variable c
 			response = c.request('my.pool.ntp.org', version=3)
 			print("Response Offset\t\t: ", response.offset)
 			print("Response Version\t: ", response.version)
-			print("Response Time\t\t: ", ctime(response.tx_time))
+			print("Response Time\t\t: ", datetime.fromtimestamp(response.tx_time))
 			print("Local DateTime\t\t: ", local)
 			print("\n")
 		elif(option == '2'):
-			print("Changing the System DateTime..")
-			# os.system("echo passwd | "sudo date -s \"Thu Aug  9 21:31:26 UTC 2012\")
-			# _ = system("echo passwd | "sudo date -s \"\")
-		elif(option == '3'):
 			print("\nStarting NTP Server..")
 			# create server socket(UDP socket)
 			s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, 0)
