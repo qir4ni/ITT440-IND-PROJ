@@ -89,6 +89,9 @@ def main():
 				host, port = address
 				print(host)
 
+				clientLocalDT = datetime.strptime(dateRecv.decode(), "%Y-%m-%d, %H:%M:%S")
+				print("T1",clientLocalDT)
+
 				T2 = datetime.now() # receive timestamp
 				T2 = T2.strftime("%Y-%m-%d, %H:%M:%S") # T2 timestamp convert to string
 				#T3 = datetime.now() # transmitted timestamp
@@ -99,9 +102,6 @@ def main():
 				print("[+] Sending T2 to Client")
 				#bytesSend = str.encode(T3)
 				#s.sendto(bytesSend, ('', port))
-
-				clientLocalDT = datetime.strptime(dateRecv.decode(), "%Y-%m-%d, %H:%M:%S")
-				print(clientLocalDT)
 
 				#DTRecv = bytesRecv.decode()
 				#print(DTRecv)
