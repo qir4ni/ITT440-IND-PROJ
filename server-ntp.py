@@ -89,7 +89,7 @@ def main():
 				host, port = address
 				print("[+] Client IP Address :", host)
 
-				clientLocalDT = datetime.strptime(dateRecv.decode(), "%Y-%m-%d %H:%M:%S.%f")
+				clientLocalDT = datetime.strptime(dateRecv.decode(), "%Y-%m-%d, %H:%M:%S.%f")
 				print("[+] T1 :",clientLocalDT)
 
 				T2 = datetime.now() # receive timestamp
