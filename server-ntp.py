@@ -105,6 +105,7 @@ def main():
 				bytesSend = str.encode(T3)
 				s.sendto(bytesSend, (host, port))
 				print("[+] Sending T3 to Client")
+				print("[+] Process Completed\n")
 
 				#DTRecv = bytesRecv.decode()
 				#print(DTRecv)
