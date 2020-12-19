@@ -94,14 +94,16 @@ def main():
 
 				T2 = datetime.now() # receive timestamp
 				T2 = T2.strftime("%Y-%m-%d, %H:%M:%S") # T2 timestamp convert to string
-				#T3 = datetime.now() # transmitted timestamp
-				#T3 = T3.strftime("%Y-%m-%d, %H:%M:%S") # T3 timestamp convert to string
 				print("T2", T2)
 				bytesSend = str.encode(T2)
 				s.sendto(bytesSend, (host, port))
 				print("[+] Sending T2 to Client")
-				#bytesSend = str.encode(T3)
-				#s.sendto(bytesSend, ('', port))
+
+				T3 = datetime.now() # transmitted timestamp
+                                T3 = T3.strftime("%Y-%m-%d, %H:%M:%S") # T3 timestamp convert to string
+				print("T3", T3)
+				bytesSend = str.encode(T3)
+				s.sendto(bytesSend, (host, port))
 
 				#DTRecv = bytesRecv.decode()
 				#print(DTRecv)
