@@ -7,8 +7,10 @@ import datetime
 from datetime import datetime
 from os import system
 
-def calcOffset():
-	print("Calculating Offset")
+def calcOffset(T1, T2, T3, T4):
+	print("\n[+] Calculating Offset")
+	print(T1, T2, T3, T4)
+	
 
 def calcDelay():
 	print("Calculating Delay")
@@ -79,6 +81,8 @@ def main():
 	T4 =  datetime.now() #timestamp reference
 	T4 = T4.strftime("%Y-%m-%d %H:%M:%S.%f")
 	print("[+] T4 :", T4)
+
+	calcOffset(T1, T2, T3, T4)
 
 	# close the socket
 	s.close()
