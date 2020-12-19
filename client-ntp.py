@@ -69,12 +69,12 @@ def main():
 
 	T2, address = s.recvfrom(buffer) # receive timestamp
 	T2 = datetime.strptime(T2.decode(), "%Y-%m-%d, %H:%M:%S")
-	print("T1", T1)
-	print("T2", T2)
+	print("[+] T1 :", T1)
+	print("[+] T2 :", T2)
 
 	T3, address = s.recvfrom(buffer)  # transmitted timestamp
 	T3 = datetime.strptime(T3.decode(), "%Y-%m-%d, %H:%M:%S")
-	print("T3", T3)
+	print("[+] T3 :", T3)
 
 	#T4 =  #timestamp reference
 	# close the socket
