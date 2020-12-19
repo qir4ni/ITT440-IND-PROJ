@@ -77,7 +77,7 @@ def main():
 	print("[+] T3 :", T3)
 
 	T4 =  datetime.now() #timestamp reference
-	T4 = T4.strftime("%Y-%m-%d, %H:%M:%S.%f")
+	T4 = T4.strftime("%Y-%m-%d %H:%M:%S.%f")
 	print("[+] T4 :", T4)
 
 	# close the socket
