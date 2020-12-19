@@ -100,7 +100,7 @@ def main():
 				print("[+] Sending T2 to Client")
 
 				T3 = datetime.now() # transmitted timestamp
-                                T3 = T3.strftime("%Y-%m-%d, %H:%M:%S") # T3 timestamp convert to string
+				T3 = T3.strftime("%Y-%m-%d, %H:%M:%S") # T3 timestamp convert to string
 				print("T3", T3)
 				bytesSend = str.encode(T3)
 				s.sendto(bytesSend, (host, port))
