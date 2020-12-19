@@ -68,12 +68,12 @@ def main():
 	T1 = localDT # originate timestamp
 
 	T2, address = s.recvfrom(buffer) # receive timestamp
-	T2 = datetime.strptime(T2.decode(), "%Y-%m-%d, %H:%M:%S.%f")
+	T2 = datetime.strptime(T2.decode(), "%Y-%m-%d %H:%M:%S.%f")
 	print("[+] T1 :", T1)
 	print("[+] T2 :", T2)
 
 	T3, address = s.recvfrom(buffer)  # transmitted timestamp
-	T3 = datetime.strptime(T3.decode(), "%Y-%m-%d, %H:%M:%S.%f")
+	T3 = datetime.strptime(T3.decode(), "%Y-%m-%d %H:%M:%S.%f")
 	print("[+] T3 :", T3)
 
 	T4 =  datetime.now() #timestamp reference
