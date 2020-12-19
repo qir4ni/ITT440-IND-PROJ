@@ -4,7 +4,7 @@ import json
 import tqdm
 import os
 import datetime
-#from datetime import datetime
+from datetime import datetime
 from os import system
 
 def calcOffset():
@@ -45,7 +45,7 @@ def main():
 	print("[+] Connected.")
 
 	# get local sys datetime
-	localDT = datetime.datetime.now()
+	localDT = datetime.now()
 
 	# print local sys datetime
 	print("[+] Local System DateTime : ", localDT)
