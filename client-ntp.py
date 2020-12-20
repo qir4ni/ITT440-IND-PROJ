@@ -77,7 +77,7 @@ def main():
 	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, 0)
 
 	# the ip address of server
-	host = '192.168.1.5'
+	host = '192.168.1.14'
 
 	# the port
 	port = 123
